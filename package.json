@@ -21,5 +21,18 @@
     "url": "https://github.com/MamitianaAntonio/backend-Expense-Tracker/issues"
   },
   "homepage": "https://github.com/MamitianaAntonio/backend-Expense-Tracker#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.1",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.1",
+    "slonik": "^47.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10",
+    "prettier": "^3.6.2"
+  }
 }
