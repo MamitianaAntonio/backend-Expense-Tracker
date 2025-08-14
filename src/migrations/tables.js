@@ -17,7 +17,6 @@ const createTable = async () => {
   try {
     const createTableSQL = readFileContent(sqlMigrationFile);
     await pool.query(`${createTableSQL}`);
-    console.log("Table created");
   } catch (error) {
     console.error("Couldn't create database: " + error);
   }
