@@ -11,6 +11,7 @@ app.listen(port, () => {
   try {
     createTable();
     console.log("Table created succesfully.");
+    console.log("Server running on: http://localhost:" + port);
   } catch (error) {
     console.error("Couldn't create tables: " + error);
   }
