@@ -1,8 +1,13 @@
 import express from "express";
 import createTable from "./migrations/tables.js";
+import { config } from "dotenv";
+
+config();
 const app = express();
 
-app.listen(3000, () => {
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
   try {
     createTable();
     console.log("Table created succesfully.");
