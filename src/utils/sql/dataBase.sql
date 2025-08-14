@@ -1,42 +1,42 @@
 -- ===========================
--- Table : User
+-- Table: users
 -- ===========================
-CREATE TABLE IF NOT EXISTS "user" (
+CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
-    user_name VARCHAR(250) NOT NULL,
+    username VARCHAR(250) NOT NULL,
     email VARCHAR(200) NOT NULL UNIQUE,
     password VARCHAR(50) NOT NULL,
     start_date DATE DEFAULT CURRENT_DATE
 );
 
 -- ===========================
--- Table : Income
+-- Table: income
 -- ===========================
-CREATE TABLE IF NOT EXISTS Income (
+CREATE TABLE IF NOT EXISTS income (
     id SERIAL PRIMARY KEY,
-    amount DOUBLE NOT NULL,
-    date DATE default current_date,
+    amount DOUBLE PRECISION NOT NULL,
+    date DATE DEFAULT CURRENT_DATE,
     source VARCHAR(200),
     description VARCHAR(250),
     creation_date DATE,
     user_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES User(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 -- ===========================
--- Table : Categorie
+-- Table: categories
 -- ===========================
-CREATE TABLE Categorie (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    categorie_name VARCHAR(250) NOT NULL
+CREATE TABLE IF NOT EXISTS categories (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(250) NOT NULL
 );
 
 -- ===========================
--- Table : Expense
+-- Table: expenses
 -- ===========================
-CREATE TABLE Expense (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    name_expense VARCHAR(200) NOT NULL,
+CREATE TABLE IF NOT EXISTS expenses (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(200) NOT NULL,
     description VARCHAR(250),
     amount FLOAT NOT NULL,
     type BOOLEAN,
@@ -44,9 +44,9 @@ CREATE TABLE Expense (
     start_date DATE,
     end_date DATE,
     receipt BOOLEAN,
-    upload BOOLEAN,
+    uploaded BOOLEAN,
     user_id INT NOT NULL,
-    categorie_id INT NOT NULL,
-    FOREIGN KEY (user_id) REFERENCES User(id),
-    FOREIGN KEY (categorie_id) REFERENCES Categorie(id)
+    category_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (category_id) REFERENCES categories(id)
 );
