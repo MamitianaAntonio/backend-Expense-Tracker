@@ -1,0 +1,25 @@
+{
+  "name": "expense-tracker-backend",
+  "version": "1.0.0",
+  "main": "src/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MamitianaAntonio/backend-Expense-Tracker.git"
+  },
+  "keywords": [
+    "backend",
+    "-",
+    "expense",
+    "tracker"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MamitianaAntonio/backend-Expense-Tracker/issues"
+  },
+  "homepage": "https://github.com/MamitianaAntonio/backend-Expense-Tracker#readme",
+  "description": ""
+}
