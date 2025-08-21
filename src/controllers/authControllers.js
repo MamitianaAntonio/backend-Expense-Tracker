@@ -1,3 +1,4 @@
+import { generateToken } from "../utils/function.js";
 import { createUserQuery, getUsersQuery } from "../utils/sql/users.js";
 import bcrypt from "bcryptjs";
 
@@ -11,13 +12,28 @@ export const signup = async (req, res) => {
       });
     }
     const hachedPassword = await bcrypt.hash(password, 10);
-    const accountCreated = await createUserQuery(email, hachedPassword);
+    await createUserQuery(email, hachedPassword);
+
+    const [access, refresh] = generateToken(email);
+
+    res.cookie("access", access, {
+      httpOnly: true,
+      secure: false, // TODO: CHANGE THIS LATER
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.cookie("refresh", refresh, {
+      httpOnly: true,
+      secure: false, // TODO: CHANGE THIS LATER
+      maxAge: 30 * 24 * 60 * 60 * 1000,
+    });
 
     // BETA TEST.
     res.status(201).json({
-      message: "user created",
+      message: "User created successfully.",
     });
   } catch (error) {
+    console.log(error);
     res.status(500).json({
       message: "Internal Server Error",
     });
