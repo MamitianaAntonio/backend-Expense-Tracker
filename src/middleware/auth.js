@@ -4,7 +4,7 @@ import { config } from "dotenv";
 config();
 
 export const authenticateUser = (req, res, next) => {
-  const token = req.header("Authaurization").replace("Bearer ", "");
+  const token = req.header("Authorization").replace("Bearer ", "");
   if (!token) {
     res.status(401).json({
       message: "Please create an account or log in",
