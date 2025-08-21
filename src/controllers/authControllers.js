@@ -14,7 +14,7 @@ export const signup = async (req, res) => {
   const accountCreated = await createUserQuery(email, hachedPassword);
 
   // BETA TEST.
-  res.json({
+  res.status(201).json({
     message: "user created",
   });
 };
