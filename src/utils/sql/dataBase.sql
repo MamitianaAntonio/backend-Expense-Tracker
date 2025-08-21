@@ -5,7 +5,7 @@ CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(250) NOT NULL,
     email VARCHAR(200) NOT NULL UNIQUE,
-    password VARCHAR(50) NOT NULL,
+    password VARCHAR(200) NOT NULL,
     start_date DATE DEFAULT CURRENT_DATE
 );
 
