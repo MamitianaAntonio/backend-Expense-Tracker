@@ -13,3 +13,12 @@ export const createUserQuery = (email, password) => {
     [email, password],
   );
 };
+
+export const getUserProfilQuery = (email) => {
+  return pool.query(
+    `
+    select email, start_date from users where email=$1
+`,
+    [email],
+  );
+};
