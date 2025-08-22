@@ -3,16 +3,21 @@ import createTable from "./migrations/tables.js";
 import { config } from "dotenv";
 import morgan from "morgan";
 import authRoutes from "./routes/authRoutes.js";
+import userRoutes from "./routes/userRoutes.js";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 config();
 const app = express();
 app.use(cors());
 app.use(morgan("dev"));
 app.use(json());
+app.use(cookieParser());
+
 const port = process.env.PORT || 3000;
 
 app.use("/api/auth/", authRoutes);
+app.use("/api/user/", userRoutes);
 
 app.listen(port, () => {
   try {
