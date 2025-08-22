@@ -6,11 +6,13 @@ export const signup = async (req, res) => {
   try {
     const { email, password } = req.body;
     const users = await getUsersQuery();
+
     if (users.rows.some((user) => user.email === email)) {
       return res.status(409).json({
         message: "You cannot create account twice.",
       });
     }
+
     const hachedPassword = await bcrypt.hash(password, 10);
     await createUserQuery(email, hachedPassword);
 
@@ -46,17 +48,21 @@ export const login = async (req, res) => {
     const userData = users.rows.find((user) => {
       return user.email == email;
     });
+
     if (!userData) {
       res.status(404).json({
         message: "User not found",
       });
     }
+
     const isSamePassword = await bcrypt.compare(password, userData.password);
+
     if (!isSamePassword) {
       res.status(401).json({
         message: "Password doesn't match",
       });
     }
+
     const [accessToken, refreshToken] = generateToken(email);
 
     res.cookie("access", accessToken, {
