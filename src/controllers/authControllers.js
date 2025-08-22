@@ -14,23 +14,22 @@ export const signup = async (req, res) => {
     const hachedPassword = await bcrypt.hash(password, 10);
     await createUserQuery(email, hachedPassword);
 
-    const [access, refresh] = generateToken(email);
+    const [accessToken, refreshToken] = generateToken(email);
 
-    res.cookie("access", access, {
+    res.cookie("access", accessToken, {
       httpOnly: true,
       secure: false, // TODO: CHANGE THIS LATER
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
-    res.cookie("refresh", refresh, {
+    res.cookie("refresh", refreshToken, {
       httpOnly: true,
       secure: false, // TODO: CHANGE THIS LATER
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
-    // BETA TEST.
     res.status(201).json({
-      message: "User created successfully.",
+      message: "User created.",
     });
   } catch (error) {
     console.log(error);
