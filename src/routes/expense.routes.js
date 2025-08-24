@@ -9,7 +9,7 @@ router.use(requireAuth);
 
 router.get("/", getAllExpenses);
 router.get("/:id", getExpenseById);
-// router.post("/", upload.single("file"), createExpense);
+router.post("/", upload.single("file"), createExpense);
 // router.put("/:id", upload.single("file"), updateExpense);
 // router.delete("/:id", deleteExpense);
 
