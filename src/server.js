@@ -4,13 +4,14 @@ const cors = require("cors");
 const path = require("path");
 require("dotenv").config();
 
-const authRoutes = require("./routes/authRoutes");
-const expenseRoutes = require("./routes/expenseRoutes");
-
 const app = express();
 
 app.use(express.json());
 app.use(cookieParser());
+
+const authRoutes = require("./routes/authRoutes.js");
+const expenseRoutes = require("./routes/expense.routes.js");
+
 
 //authorized cookie
 app.use(cors({
@@ -27,4 +28,9 @@ app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
+app.listen(PORT, (res, error) => {
+  res.console.log(`Server running on http://localhost:${PORT}`)
+  if(error){
+    console.error(error);
+  }
+});
