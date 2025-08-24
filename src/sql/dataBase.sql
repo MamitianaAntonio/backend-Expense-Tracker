@@ -3,10 +3,10 @@ CREATE USER me WITH PASSWORD my_passwd;
 
 CREATE DATABASE expenseTracker OWNER me;
 
-\c monprojet;
+\c expenseTracker;
 
 
-GRANT ALL PRIVILEGES ON TABLE users TO monuser;
+GRANT ALL PRIVILEGES ON TABLE users TO me;
 
 
 CREATE TABLE User (
