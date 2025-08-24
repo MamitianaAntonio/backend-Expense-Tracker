@@ -10,16 +10,16 @@ exports.getAllExpenses = async (req, res) => {
   }
 };
 
-// exports.getExpenseById = async (req, res) => {
-//   try {
-//     const item = await Expense.getByIdForUser(req.user.id, req.params.id);
-//     if (!item) return res.status(404).json({ message: "expense not found" });
-//     res.json(item);
-//   } catch (e) {
-//     console.error(e);
-//     res.status(500).json({ message: "server error" });
-//   }
-// };
+exports.getExpenseById = async (req, res) => {
+  try {
+    const item = await Expense.getByIdForUser(req.user.id, req.params.id);
+    if (!item) return res.status(404).json({ message: "expense not found" });
+    res.json(item);
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: "server error" });
+  }
+};
 
 // exports.createExpense = async (req, res) => {
 //   const { title, amount, category } = req.body;
