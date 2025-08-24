@@ -53,13 +53,13 @@ exports.updateExpense = async (req, res) => {
   }
 };
 
-// exports.deleteExpense = async (req, res) => {
-//   try {
-//     const deleted = await Expense.deleteForUser(req.user.id, req.params.id);
-//     if (!deleted) return res.status(404).json({ message: "expense not found" });
-//     res.json({ message: "expense deleted", expense: deleted });
-//   } catch (e) {
-//     console.error(e);
-//     res.status(500).json({ message: "server error" });
-//   }
-// };
+exports.deleteExpense = async (req, res) => {
+  try {
+    const deleted = await Expense.deleteForUser(req.user.id, req.params.id);
+    if (!deleted) return res.status(404).json({ message: "expense not found" });
+    res.json({ message: "expense deleted", expense: deleted });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: "server error" });
+  }
+};
