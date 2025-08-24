@@ -35,23 +35,23 @@ exports.createExpense = async (req, res) => {
   }
 };
 
-// exports.updateExpense = async (req, res) => {
-//   try {
-//     const fields = {
-//       title: req.body.title,
-//       amount: req.body.amount,
-//       category: req.body.category,
-//       filePath: req.file ? `/uploads/${req.file.filename}` : undefined,
-//     };
-//     const updated = await Expense.updateForUser(req.user.id, req.params.id, fields);
-//     if (!updated) return res.status(404).json({ message: "expense not found" });
-//     res.json(updated);
+exports.updateExpense = async (req, res) => {
+  try {
+    const fields = {
+      title: req.body.title,
+      amount: req.body.amount,
+      category: req.body.category,
+      filePath: req.file ? `/uploads/${req.file.filename}` : undefined,
+    };
+    const updated = await Expense.updateForUser(req.user.id, req.params.id, fields);
+    if (!updated) return res.status(404).json({ message: "expense not found" });
+    res.json(updated);
 
-//   } catch (e) {
-//     console.error(e);
-//     res.status(500).json({ message: "server error" });
-//   }
-// };
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ message: "server error" });
+  }
+};
 
 // exports.deleteExpense = async (req, res) => {
 //   try {
