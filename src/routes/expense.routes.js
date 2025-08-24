@@ -1,5 +1,5 @@
 const express = require("express");
-const { getAllExpenses, getExpenseById, createExpense, updateExpense, deleteExpense } = require("../controllers/expenseController.js");
+const { getAllExpenses, getExpenseById, createExpense, updateExpense, deleteExpense } = require("../controllers/expense.controller.js");
 const requireAuth = require("../middleware/authMiddleware.js");
 const upload = require("../middleware/multer.middleware.js");
 
