@@ -26,7 +26,7 @@ async function getByIdForUser(userId, id) {
   return rows[0] || null;
 }
 
-async function updateForUser(userId, id, { title, amount, category, filePath }) {
+async function updateForUser(userId, id, { title, amount, category, description, filePath }) {
   const fields = [];
   const values = [];
   let idx = 1;
@@ -34,6 +34,7 @@ async function updateForUser(userId, id, { title, amount, category, filePath }) 
   if (title !== undefined) { fields.push(`title=$${idx++}`); values.push(title); }
   if (amount !== undefined) { fields.push(`amount=$${idx++}`); values.push(amount); }
   if (category !== undefined) { fields.push(`category=$${idx++}`); values.push(category); }
+  if (description !== undefined) { fields.push(`description=$${idx++}`); values.push(description); }
   if (filePath !== undefined) { fields.push(`file_path=$${idx++}`); values.push(filePath); }
 
   if (fields.length === 0) {
