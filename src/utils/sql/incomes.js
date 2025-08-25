@@ -17,3 +17,20 @@ export const getIncomesBtwDateQuery = (email, start_date, end_date) => {
     [email, start_date, end_date],
   );
 };
+
+export const getIncomesWthStartDateQuery = (email, start_date) => {
+  return pool.query(
+    `
+    select i.*, u.email, u.username from income as i inner join users u on u.id = i.user_id where u.email=$1 and current_date >= $2;
+`,
+    [email, start],
+  );
+};
+
+export const getIncomesWthEndDateQuery = (email, end_date) => {
+  return pool.query(
+    `    select i.*, u.email, u.username from income as i inner join users u on u.id = i.user_id where u.email=$1 and current_date <= $2;
+`,
+    [email, end_date],
+  );
+};
