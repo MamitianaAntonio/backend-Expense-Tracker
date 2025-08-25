@@ -37,7 +37,7 @@ export const getIncomesWthEndDateQuery = (email, end_date) => {
 
 export const postIncomeQuery = (id, amount, date, source, description) => {
   return pool.query(
-    `insert from income (amount, date, source, description, user_id) values ($1, $2, $3, $4, $5);`,
+    `insert into income (amount, date, source, description, user_id) values ($1, $2, $3, $4, $5);`,
     [amount, date, source, description, id],
   );
 };
