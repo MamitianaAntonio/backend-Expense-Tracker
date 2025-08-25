@@ -15,7 +15,7 @@ export const signup = async (req, res) => {
 
     const hachedPassword = await bcrypt.hash(password, 10);
     const createdUser = await createUserQuery(email, hachedPassword);
-    const id = createdUser.rows[0];
+    const id = createdUser.rows[0].id;
     const [accessToken, refreshToken] = generateToken(email, id);
 
     res.cookie("access", accessToken, {
@@ -62,7 +62,7 @@ export const login = async (req, res) => {
         message: "Password doesn't match",
       });
     }
-    const id = users.rows[0];
+    const id = users.rows[0].id;
     const [accessToken, refreshToken] = generateToken(email, id);
 
     res.cookie("access", accessToken, {
