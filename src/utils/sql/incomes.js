@@ -55,3 +55,7 @@ export const updateIncomeQuery = (
     [amount, date, source, description, user_id, id],
   );
 };
+
+export const deleteIncomeQuery = (id, idx) => {
+  return pool.query(`delete from income where id=$1 and user_id=$2`, [id, idx]);
+};

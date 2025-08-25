@@ -1,4 +1,5 @@
 import {
+  deleteIncomeQuery,
   getIncomesBtwDateQuery,
   getIncomesQuery,
   getIncomesWthEndDateQuery,
@@ -95,6 +96,22 @@ export const updateIncome = async (req, res) => {
 
     res.status(200).json({
       message: "Income updated succesfully.",
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+export const deleteIncome = async (req, res) => {
+  try {
+    const idx = req.user.id;
+    const id = req.query.id;
+    await deleteIncomeQuery(id, idx);
+    res.status(200).json({
+      message: "Income deleted succesfully",
     });
   } catch (error) {
     console.log(error);
