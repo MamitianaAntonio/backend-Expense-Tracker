@@ -14,19 +14,19 @@ export const signup = async (req, res) => {
     }
 
     const hachedPassword = await bcrypt.hash(password, 10);
-    await createUserQuery(email, hachedPassword);
-
-    const [accessToken, refreshToken] = generateToken(email);
+    const createdUser = await createUserQuery(email, hachedPassword);
+    const id = createdUser.rows[0].id;
+    const [accessToken, refreshToken] = generateToken(email, id);
 
     res.cookie("access", accessToken, {
       httpOnly: true,
-      secure: false, // TODO: CHANGE THIS LATER
+      secure: false, // TODO: CHANGE THIS LATER.
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.cookie("refresh", refreshToken, {
       httpOnly: true,
-      secure: false, // TODO: CHANGE THIS LATER
+      secure: false, // TODO: CHANGE THIS LATER.
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
@@ -62,8 +62,9 @@ export const login = async (req, res) => {
         message: "Password doesn't match",
       });
     }
-
-    const [accessToken, refreshToken] = generateToken(email);
+    const id = userData.id;
+    console.log(id);
+    const [accessToken, refreshToken] = generateToken(email, id);
 
     res.cookie("access", accessToken, {
       httpOnly: true,

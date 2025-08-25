@@ -4,6 +4,8 @@ import { config } from "dotenv";
 import morgan from "morgan";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import incomesRoutes from "./routes/incomeRoutes.js";
+
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -18,6 +20,7 @@ const port = process.env.PORT || 3000;
 
 app.use("/api/auth/", authRoutes);
 app.use("/api/user/", userRoutes);
+app.use("/api/incomes/", incomesRoutes);
 
 app.listen(port, () => {
   try {

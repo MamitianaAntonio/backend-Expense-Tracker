@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS income (
     date DATE DEFAULT CURRENT_DATE,
     source VARCHAR(200),
     description VARCHAR(250),
-    creation_date DATE,
+    creation_date DATE DEFAULT CURRENT_DATE,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
