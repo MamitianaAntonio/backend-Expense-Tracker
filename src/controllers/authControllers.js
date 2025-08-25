@@ -20,13 +20,13 @@ export const signup = async (req, res) => {
 
     res.cookie("access", accessToken, {
       httpOnly: true,
-      secure: false, // TODO: CHANGE THIS LATER
+      secure: false, // TODO: CHANGE THIS LATER.
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.cookie("refresh", refreshToken, {
       httpOnly: true,
-      secure: false, // TODO: CHANGE THIS LATER
+      secure: false, // TODO: CHANGE THIS LATER.
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
