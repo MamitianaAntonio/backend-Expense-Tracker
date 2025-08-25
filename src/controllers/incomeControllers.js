@@ -85,12 +85,13 @@ export const postIncome = async (req, res) => {
 export const updateIncome = async (req, res) => {
   try {
     const id = req.user.id;
+    const idx = req.query.id;
     const amount = req.body.amount;
     const date = req.body.date;
     const source = req.body.source;
     const description = req.body.description;
 
-    await updateIncomeQuery(amount, date, source, description, id);
+    await updateIncomeQuery(amount, date, source, description, id, idx);
 
     res.status(200).json({
       message: "Income updated succesfully.",

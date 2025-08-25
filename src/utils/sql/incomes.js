@@ -48,9 +48,10 @@ export const updateIncomeQuery = (
   source,
   description,
   user_id,
+  id,
 ) => {
   return pool.query(
-    `update income set amount=$1, date=$2, source=$3, description=$4 where user_id=$5`,
-    [amount, date, source, description, user_id],
+    `update income set amount=$1, date=$2, source=$3, description=$4 where user_id=$5 and id=$6`,
+    [amount, date, source, description, user_id, id],
   );
 };
