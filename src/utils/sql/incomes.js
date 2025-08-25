@@ -41,3 +41,16 @@ export const postIncomeQuery = (id, amount, date, source, description) => {
     [amount, date, source, description, id],
   );
 };
+
+export const updateIncomeQuery = (
+  amount,
+  date,
+  source,
+  description,
+  user_id,
+) => {
+  return pool.query(
+    `update income set amount=$1, date=$2, source=$3, description=$4 where user_id=$5`,
+    [amount, date, source, description, user_id],
+  );
+};
