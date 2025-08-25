@@ -9,6 +9,7 @@ import {
 export const getIncomes = async (req, res) => {
   try {
     const id = req.user.id;
+    console.log(" id is this " + id);
     const start_date = req.query.start;
     const end_date = req.query.end;
     let listOfIncomes;

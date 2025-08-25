@@ -62,7 +62,8 @@ export const login = async (req, res) => {
         message: "Password doesn't match",
       });
     }
-    const id = users.rows[0].id;
+    const id = userData.id;
+    console.log(id);
     const [accessToken, refreshToken] = generateToken(email, id);
 
     res.cookie("access", accessToken, {
