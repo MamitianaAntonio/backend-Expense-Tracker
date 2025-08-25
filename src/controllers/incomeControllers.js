@@ -40,3 +40,20 @@ export const getIncomes = async (req, res) => {
     });
   }
 };
+
+export const getIncomesById = async (req, res) => {
+  try {
+    const email = req.user;
+    const resultSet = await getIncomesQuery(email);
+    const id = req.params.id;
+    const income = resultSet.rows[id];
+    res.status(200).json({
+      data: income,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
