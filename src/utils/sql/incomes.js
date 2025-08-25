@@ -1,37 +1,37 @@
 import { pool } from "../../config/db.js";
 
-export const getIncomesQuery = (email) => {
+export const getIncomesQuery = (id) => {
   return pool.query(
     `
-    select i.*, u.email, u.username from income as i inner join users u on u.id = i.user_id where u.email=$1
+    select * from income where user_id=$1
 `,
-    [email],
+    [id],
   );
 };
 
-export const getIncomesBtwDateQuery = (email, start_date, end_date) => {
+export const getIncomesBtwDateQuery = (id, start_date, end_date) => {
   return pool.query(
     `
-    select i.*, u.email, u.username from income as i inner join users u on u.id = i.user_id where u.email=$1 and current_date between $2 and $3;
+    select * from income where user_id=$1 and current_date between $2 and $3;
 `,
-    [email, start_date, end_date],
+    [id, start_date, end_date],
   );
 };
 
-export const getIncomesWthStartDateQuery = (email, start_date) => {
+export const getIncomesWthStartDateQuery = (id, start_date) => {
   return pool.query(
     `
-    select i.*, u.email, u.username from income as i inner join users u on u.id = i.user_id where u.email=$1 and current_date >= $2;
+    select * from income where user_id=$1 and current_date >= $2;
 `,
-    [email, start],
+    [id, start],
   );
 };
 
-export const getIncomesWthEndDateQuery = (email, end_date) => {
+export const getIncomesWthEndDateQuery = (id, end_date) => {
   return pool.query(
-    `    select i.*, u.email, u.username from income as i inner join users u on u.id = i.user_id where u.email=$1 and current_date <= $2;
+    `select * from income where user_id=$1 and current_date <= $2;
 `,
-    [email, end_date],
+    [id, end_date],
   );
 };
 
