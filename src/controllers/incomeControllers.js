@@ -3,6 +3,7 @@ import {
   getIncomesQuery,
   getIncomesWthEndDateQuery,
   getIncomesWthStartDateQuery,
+  postIncomeQuery,
 } from "../utils/sql/incomes.js";
 
 export const getIncomes = async (req, res) => {
@@ -49,6 +50,27 @@ export const getIncomesById = async (req, res) => {
     const income = resultSet.rows[id];
     res.status(200).json({
       data: income,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+export const postIncome = async (req, res) => {
+  try {
+    const id = req.user.id;
+    const amount = req.body.amount;
+    const date = req.body.date;
+    const source = req.body.source;
+    const description = req.body.description;
+
+    await postIncomeQuery(id, amount, date, source, description);
+
+    res.status(201).json({
+      message: "Income created succesfully...",
     });
   } catch (error) {
     console.log(error);
