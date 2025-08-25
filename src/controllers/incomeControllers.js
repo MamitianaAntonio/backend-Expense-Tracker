@@ -8,23 +8,23 @@ import {
 
 export const getIncomes = async (req, res) => {
   try {
-    const email = req.user.email;
+    const id = req.user.id;
     const start_date = req.query.start;
     const end_date = req.query.end;
     let listOfIncomes;
     if (start_date == undefined && end_date == undefined) {
-      const resultSet = await getIncomesQuery(email);
+      const resultSet = await getIncomesQuery(id);
       listOfIncomes = resultSet.rows;
     } else if (start_date != undefined || end_date != undefined) {
       if (start_date == undefined && end_date != undefined) {
-        const resultSet = await getIncomesWthEndDateQuery(email, end_date);
+        const resultSet = await getIncomesWthEndDateQuery(id, end_date);
         listOfIncomes = resultSet.rows;
       } else if (start_date != undefined && end_date == undefined) {
-        const resultSet = await getIncomesWthStartDateQuery(email, start_date);
+        const resultSet = await getIncomesWthStartDateQuery(id, start_date);
         listOfIncomes = resultSet.rows;
       } else {
         const resultSet = await getIncomesBtwDateQuery(
-          email,
+          id,
           start_date,
           end_date,
         );
@@ -44,10 +44,10 @@ export const getIncomes = async (req, res) => {
 
 export const getIncomesById = async (req, res) => {
   try {
-    const email = req.user;
-    const resultSet = await getIncomesQuery(email);
-    const id = req.params.id;
-    const income = resultSet.rows[id];
+    const id = req.user.id;
+    const resultSet = await getIncomesQuery(id);
+    const idx = req.params.id;
+    const income = resultSet.rows[idx];
     res.status(200).json({
       data: income,
     });
