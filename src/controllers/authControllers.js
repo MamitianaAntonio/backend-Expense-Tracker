@@ -1,6 +1,10 @@
 import { generateToken } from "../utils/function.js";
 import { createUserQuery, getUsersQuery } from "../utils/sql/users.js";
 import bcrypt from "bcryptjs";
+import { config } from "dotenv";
+import jwt from "jsonwebtoken";
+
+config();
 
 export const signup = async (req, res) => {
   try {
@@ -81,6 +85,43 @@ export const login = async (req, res) => {
     res.status(200).json({
       access: accessToken,
       refresh: refreshToken,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+export const refresh = async (req, res) => {
+  try {
+    const refreshToken = req.cookie.refresh;
+    if (!refreshToken) {
+      res.status(401).json({
+        message: "No refresh found.",
+      });
+    }
+    // AKA payload
+    const decodedInformation = jwt.verify(
+      refreshToken,
+      process.env.REFRESH_ACCESS,
+    );
+
+    // Actually I don't resend a refreshToken, due to security issues.
+    const [accessToken, _r] = generateToken(
+      decodedInformation.email,
+      decodedInformation.id,
+    );
+
+    res.cookie("access", accessToken, {
+      httpOnly: true,
+      secure: false, // TODO: CHANGE THIS LATER
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(200).json({
+      message: "Access token refreshed",
     });
   } catch (error) {
     console.log(error);
