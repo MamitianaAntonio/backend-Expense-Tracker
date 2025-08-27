@@ -3,15 +3,15 @@
 **Route File:** `src/routes/authRoutes.js`  
 **Controller File:** `src/controllers/authController.js`
 
-- [ ] **POST /api/auth/signup**
+- [x] **POST /api/auth/signup**
   - Function: `signup()`
   - Middleware: none
 
-- [ ] **POST /api/auth/login**
+- [x] **POST /api/auth/login**
   - Function: `login()`
   - Middleware: none
 
-- [ ] **GET /api/auth/me**
+- [x] **GET /api/auth/me**
   - Function: `getMe()`
   - Middleware: `authMiddleware`
 
@@ -66,23 +66,23 @@
 **Route File:** `src/routes/incomeRoutes.js`  
 **Controller File:** `src/controllers/incomeController.js`
 
-- [ ] **GET /api/incomes**
+- [x] **GET /api/incomes**
   - Function: `getAllIncomes()`
   - Middleware: `authMiddleware`
 
-- [ ] **GET /api/incomes/:id**
+- [x] **GET /api/incomes/:id**
   - Function: `getIncomeById()`
   - Middleware: `authMiddleware`
 
-- [ ] **POST /api/incomes**
+- [x] **POST /api/incomes**
   - Function: `createIncome()`
   - Middleware: `authMiddleware`
 
-- [ ] **PUT /api/incomes/:id**
+- [x] **PUT /api/incomes/:id**
   - Function: `updateIncome()`
   - Middleware: `authMiddleware`
 
-- [ ] **DELETE /api/incomes/:id**
+- [x] **DELETE /api/incomes/:id**
   - Function: `deleteIncome()`
   - Middleware: `authMiddleware`
 
@@ -135,6 +135,6 @@
 **Route File:** `src/routes/userRoutes.js`  
 **Controller File:** `src/controllers/userController.js`
 
-- [ ] **GET /api/user/profile**
+- [x] **GET /api/user/profile**
   - Function: `getProfile()`
   - Middleware: `authMiddleware`
