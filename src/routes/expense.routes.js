@@ -1,16 +1,13 @@
-const express = require("express");
-const { getAllExpenses, getExpenseById, createExpense, updateExpense, deleteExpense } = require("../controllers/expense.controller.js");
-const requireAuth = require("../middleware/authMiddleware.js");
-const upload = require("../middleware/multer.middleware.js");
+import { Router } from "express";
+import { getAllExpenses, getExpenseById, createExpense, updateExpense, deleteExpense } from "../controllers/expense.controller.js";
+import { authenticateUser } from "../middleware/auth.js";
 
-const router = express.Router();
+const router = Router();
 
-router.use(requireAuth);
+router.get("/", authenticateUser, getAllExpenses);
+router.get("/:id", authenticateUser, getExpenseById);
+router.post("/", authenticateUser, createExpense);
+router.put("/:id", authenticateUser, updateExpense);
+router.delete("/:id", authenticateUser, deleteExpense);
 
-router.get("/", getAllExpenses);
-router.get("/:id", getExpenseById);
-router.post("/", upload.single("file"), createExpense);
-router.put("/:id", upload.single("file"), updateExpense);
-router.delete("/:id", deleteExpense);
-
-module.exports = router;
+export default router;

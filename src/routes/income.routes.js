@@ -6,7 +6,7 @@ import {
   getIncomesById,
   postIncome,
   updateIncome,
-} from "../controllers/incomeControllers.js";
+} from "../controllers/income.controller.js";
 
 const router = Router();
 

@@ -1,4 +1,4 @@
-import { getAllByUser, getByIdForUser, create, updateForUser, deleteForUser } from "../models/expenseModel";
+import { getAllByUser, getByIdForUser, create, updateForUser, deleteForUser } from "../models/expense.js";
 
 export async function getAllExpenses(req, res) {
   try {
