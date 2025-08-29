@@ -33,17 +33,22 @@ export const createExpenseQuery = async (
 export const updateExpenseQuery = async (
   amount,
   date,
-  source,
-  descritption,
-  userId,
+  categoryId,
+  description,
+  type,
+  startDate,
+  endDate,
   id
 ) => {
-  return pool.query(
-    `
-     update expense set amount=$1, date=$2, source=$3, description=$4 where user_id=$5 and id=$6 returning *;
-    `,
-    [amount, date, source, descritption, userId, id]
-  );
+  return type
+    ? pool.query(
+        ` update expenses set amount=$1, date=$2, category_id=$3, description=$4, type=$5, start_date=$6, end_date=$7 where id=$8 returning *; `,
+        [amount, date, categoryId, description, type, startDate, endDate, id]
+      )
+    : pool.query(
+        ` update expenses set amount=$1, date=$2, category_id=$3, description=$4 where id=$5 returning *; `,
+        [amount, date, categoryId, description, id]
+      );
 };
 
 export async function getAllByUser(userId) {
