@@ -32,7 +32,7 @@ export const createExpense = async (req, res) => {
     const userId = req.user.id;
     const { amount, date, categoryId, description, type, startDate, endDate } =
       req.body;
-
+    console.log(req.body)
     const resultSet = await createExpenseQuery(
       description,
       amount,
@@ -48,6 +48,7 @@ export const createExpense = async (req, res) => {
       data: resultSet.rows[0],
     });
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       message: "Internal Server Error",
     });
@@ -75,6 +76,7 @@ export const updateExpense = async (req, res) => {
       data: resultSet.rows[0],
     });
   } catch (error) {
+    console.log(error)
     res.status(500).json({
       message: "Internal Server Error",
     });
