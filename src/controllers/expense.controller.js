@@ -1,4 +1,11 @@
-import { getAllByUser, getByIdForUser, create, updateForUser, deleteForUser } from "../models/expense.js";
+import {
+  getAllByUser,
+  getByIdForUser,
+  create,
+  updateForUser,
+  deleteForUser,
+  createExpenseQuery,
+} from "../models/expense.js";
 
 export async function getAllExpenses(req, res) {
   try {
@@ -24,8 +31,25 @@ export async function getExpenseById(req, res) {
 export const createExpense = async (req, res) => {
   try {
     const userId = req.user.id;
+    const { amount, date, source, description } = req.body;
+
+    const resultSet = await createExpenseQuery(
+      amount,
+      date,
+      source,
+      description,
+      userId
+    );
+
+    res.status(201).json({
+      data: resultSet.rows[0],
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
   }
-}
+};
 
 export async function deleteExpense(req, res) {
   try {
