@@ -5,6 +5,7 @@ import {
   updateForUser,
   deleteForUser,
   createExpenseQuery,
+  updateExpenseQuery,
 } from "../models/expense.js";
 
 export async function getAllExpenses(req, res) {
@@ -54,8 +55,27 @@ export const createExpense = async (req, res) => {
 export const updateExpense = async (req, res) => {
   try {
     const userId = req.user.id;
+    const expenseId = req.params.id;
+    const { amount, date, source, description } = req.body;
+
+    const resultSet = await updateExpenseQuery(
+      amount,
+      date,
+      source,
+      description,
+      userId,
+      expenseId
+    );
+
+    res.status(200).json({
+      data: resultSet.rows[0],
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
   }
-}
+};
 
 export async function deleteExpense(req, res) {
   try {
