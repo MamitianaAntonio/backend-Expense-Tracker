@@ -21,7 +21,11 @@ export async function getExpenseById(req, res) {
   }
 }
 
-
+export const createExpense = async (req, res) => {
+  try {
+    const userId = req.user.id;
+  }
+}
 
 export async function deleteExpense(req, res) {
   try {

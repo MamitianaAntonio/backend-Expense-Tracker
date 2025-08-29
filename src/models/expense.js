@@ -1,6 +1,6 @@
 import { pool } from "../config/db.js";
 
-export const createIncomeQuery = async (
+export const createExpenseQuery = async (
   amount,
   date,
   source,
@@ -9,13 +9,13 @@ export const createIncomeQuery = async (
 ) => {
   return pool.query(
     `
-      insert into income (amount, date, source, description, user_id) values ($1, $2, $3, $4, $5) returning *;
+      insert into expense (amount, date, source, description, user_id) values ($1, $2, $3, $4, $5) returning *;
     `,
     [amount, date, source, descritption, userId]
   );
 };
 
-export const updateIncomeQuery = async (
+export const updateExpenseQuery = async (
   amount,
   date,
   source,
@@ -24,7 +24,7 @@ export const updateIncomeQuery = async (
 ) => {
   return pool.query(
     `
-     update income set amount=$1, date=$2, source=$3, description=$4 where user_id=$5 returning *;
+     update expense set amount=$1, date=$2, source=$3, description=$4 where user_id=$5 returning *;
     `,
     [amount, date, source, descritption, userId]
   );
