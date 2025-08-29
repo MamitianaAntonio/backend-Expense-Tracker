@@ -1,6 +1,21 @@
 import { pool } from "../config/db.js";
 
-
+export const createIncomeQuery = async (
+  userId,
+  id,
+  amount,
+  date,
+  source,
+  descritption,
+  userId
+) => {
+  return pool.query(
+    `
+      insert into income (amount, date, source, description, user_id) values ($1, $2, $3, $4, $5) returning *;
+    `,
+    [amount, date, source, descritption, userId]
+  );
+};
 
 export async function getAllByUser(userId) {
   const { rows } = await pool.query(
@@ -17,8 +32,6 @@ export async function getByIdForUser(userId, id) {
   );
   return rows[0] || null;
 }
-
-
 
 export async function deleteForUser(userId, id) {
   const { rows } = await pool.query(
