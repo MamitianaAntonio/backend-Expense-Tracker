@@ -1,5 +1,5 @@
 import { generateToken } from "../utils/function.js";
-import { createUserQuery, getUsersQuery } from "../utils/sql/users.js";
+import { createUserQuery, getUsersQuery } from "../services/users.js";
 import bcrypt from "bcryptjs";
 
 export const signup = async (req, res) => {

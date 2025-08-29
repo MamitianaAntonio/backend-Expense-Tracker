@@ -1,4 +1,4 @@
-import { getUserProfilQuery } from "../utils/sql/users.js";
+import { getUserProfilQuery } from "../services/users.js";
 
 export const getUserProfil = async (req, res) => {
   try {
