@@ -66,23 +66,23 @@
 **Route File:** `src/routes/incomeRoutes.js`  
 **Controller File:** `src/controllers/incomeController.js`
 
-- [ ] **GET /api/incomes**
+- [x] **GET /api/incomes**
   - Function: `getAllIncomes()`
   - Middleware: `authMiddleware`
 
-- [ ] **GET /api/incomes/:id**
+- [x] **GET /api/incomes/:id**
   - Function: `getIncomeById()`
   - Middleware: `authMiddleware`
 
-- [ ] **POST /api/incomes**
+- [x] **POST /api/incomes**
   - Function: `createIncome()`
   - Middleware: `authMiddleware`
 
-- [ ] **PUT /api/incomes/:id**
+- [x] **PUT /api/incomes/:id**
   - Function: `updateIncome()`
   - Middleware: `authMiddleware`
 
-- [ ] **DELETE /api/incomes/:id**
+- [x] **DELETE /api/incomes/:id**
   - Function: `deleteIncome()`
   - Middleware: `authMiddleware`
 
