@@ -20,13 +20,14 @@ export const updateExpenseQuery = async (
   date,
   source,
   descritption,
-  userId
+  userId,
+  id
 ) => {
   return pool.query(
     `
-     update expense set amount=$1, date=$2, source=$3, description=$4 where user_id=$5 returning *;
+     update expense set amount=$1, date=$2, source=$3, description=$4 where user_id=$5 and id=$6 returning *;
     `,
-    [amount, date, source, descritption, userId]
+    [amount, date, source, descritption, userId, id]
   );
 };
 
