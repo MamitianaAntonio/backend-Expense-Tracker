@@ -1,8 +1,6 @@
 import { pool } from "../config/db.js";
 
 export const createIncomeQuery = async (
-  userId,
-  id,
   amount,
   date,
   source,
@@ -12,6 +10,21 @@ export const createIncomeQuery = async (
   return pool.query(
     `
       insert into income (amount, date, source, description, user_id) values ($1, $2, $3, $4, $5) returning *;
+    `,
+    [amount, date, source, descritption, userId]
+  );
+};
+
+export const updateIncomeQuery = async (
+  amount,
+  date,
+  source,
+  descritption,
+  userId
+) => {
+  return pool.query(
+    `
+     update income set amount=$1, date=$2, source=$3, description=$4 where user_id=$5 returning *;
     `,
     [amount, date, source, descritption, userId]
   );
