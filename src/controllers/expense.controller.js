@@ -1,8 +1,6 @@
 import {
   getAllByUser,
   getByIdForUser,
-  create,
-  updateForUser,
   deleteForUser,
   createExpenseQuery,
   updateExpenseQuery,
@@ -32,14 +30,18 @@ export async function getExpenseById(req, res) {
 export const createExpense = async (req, res) => {
   try {
     const userId = req.user.id;
-    const { amount, date, source, description } = req.body;
+    const { amount, date, categoryId, description, type, startDate, endDate } =
+      req.body;
 
     const resultSet = await createExpenseQuery(
-      amount,
-      date,
-      source,
       description,
-      userId
+      amount,
+      type,
+      date,
+      startDate,
+      endDate,
+      userId,
+      categoryId
     );
 
     res.status(201).json({
@@ -54,16 +56,18 @@ export const createExpense = async (req, res) => {
 
 export const updateExpense = async (req, res) => {
   try {
-    const userId = req.user.id;
     const expenseId = req.params.id;
-    const { amount, date, source, description } = req.body;
+    const { amount, date, categoryId, description, type, startDate, endDate } =
+      req.body;
 
     const resultSet = await updateExpenseQuery(
       amount,
       date,
-      source,
+      categoryId,
       description,
-      userId,
+      type,
+      startDate,
+      endDate,
       expenseId
     );
 
