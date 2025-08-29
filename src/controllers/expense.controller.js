@@ -1,8 +1,6 @@
 import {
   getAllByUser,
   getByIdForUser,
-  create,
-  updateForUser,
   deleteForUser,
   createExpenseQuery,
   updateExpenseQuery,
