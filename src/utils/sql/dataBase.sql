@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS categories (
 -- ===========================
 CREATE TABLE IF NOT EXISTS expenses (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(200) NOT NULL,
+    name VARCHAR(200),
     description VARCHAR(250),
     amount FLOAT NOT NULL,
     type BOOLEAN,

@@ -1,18 +1,33 @@
 import { pool } from "../config/db.js";
 
 export const createExpenseQuery = async (
+  description,
   amount,
+  type,
   date,
-  source,
-  descritption,
-  userId
+  start_date,
+  end_date,
+  user_id,
+  category_id
 ) => {
-  return pool.query(
-    `
-      insert into expense (amount, date, source, description, user_id) values ($1, $2, $3, $4, $5) returning *;
-    `,
-    [amount, date, source, descritption, userId]
-  );
+  return type
+    ? pool.query(
+        `insert into expenses (description, amount, type, date, start_date, end_date, user_id, category_id) values ($1, $2, $3, $4, $5, $6, $7, $8) returning *;`,
+        [
+          description,
+          amount,
+          type,
+          date,
+          start_date,
+          end_date,
+          user_id,
+          category_id,
+        ]
+      )
+    : pool.query(
+        `insert into expenses (description, amount, type, date, user_id, category_id) values ($1, $2, $3, $4, $5, $6) returning *;`,
+        [description, amount, type, date, user_id, category_id]
+      );
 };
 
 export const updateExpenseQuery = async (
