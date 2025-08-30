@@ -4,7 +4,7 @@ import {
   deleteForUser,
   createExpenseQuery,
   updateExpenseQuery,
-} from "../models/expense.js";
+} from "../services/expense.js";
 
 export async function getAllExpenses(req, res) {
   try {

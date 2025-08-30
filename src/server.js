@@ -1,5 +1,5 @@
 import express, { json } from "express";
-import createTable from "./migrations/tables.js";
+import createTable from "./models/tables.js";
 import { config } from "dotenv";
 import morgan from "morgan";
 import authRoutes from "./routes/auth.routes.js";

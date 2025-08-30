@@ -6,7 +6,7 @@ import {
   getIncomesWthStartDateQuery,
   postIncomeQuery,
   updateIncomeQuery,
-} from "../utils/sql/incomes.js";
+} from "../services/incomes.js";
 
 export const getIncomes = async (req, res) => {
   try {
