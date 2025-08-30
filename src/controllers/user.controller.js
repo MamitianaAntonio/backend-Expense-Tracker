@@ -2,8 +2,8 @@ import { getUserProfilQuery } from "../services/users.js";
 
 export const getUserProfil = async (req, res) => {
   try {
-    const email = req.user.email;
-    const userResultSet = await getUserProfilQuery(email);
+    const id = req.user.id;
+    const userResultSet = await getUserProfilQuery(id);
     const userInformation = userResultSet.rows[0];
     res.status(200).json({
       email: userInformation.email,
