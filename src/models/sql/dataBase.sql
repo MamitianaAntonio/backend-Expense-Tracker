@@ -29,6 +29,8 @@ CREATE TABLE IF NOT EXISTS income (
 CREATE TABLE IF NOT EXISTS categories (
     id SERIAL PRIMARY KEY,
     name VARCHAR(250) NOT NULL
+    user_id int not null,
+    FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
 -- ===========================
@@ -43,8 +45,7 @@ CREATE TABLE IF NOT EXISTS expenses (
     date DATE,
     start_date DATE,
     end_date DATE,
-    receipt BOOLEAN,
-    uploaded BOOLEAN,
+    receipt TEXT,
     user_id INT NOT NULL,
     category_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
