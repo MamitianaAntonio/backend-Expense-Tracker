@@ -41,15 +41,26 @@ export const updateExpenseQuery = async (
   startDate,
   endDate,
   id,
+  receipt,
 ) => {
   return type
     ? pool.query(
-        ` update expenses set amount=$1, date=$2, category_id=$3, description=$4, type=$5, start_date=$6, end_date=$7 where id=$8 returning *; `,
-        [amount, date, categoryId, description, type, startDate, endDate, id],
+        ` update expenses set amount=$1, date=$2, category_id=$3, description=$4, type=$5, start_date=$6, end_date=$7 , receipt=$9 where id=$8 returning *; `,
+        [
+          amount,
+          date,
+          categoryId,
+          description,
+          type,
+          startDate,
+          endDate,
+          id,
+          receipt,
+        ],
       )
     : pool.query(
-        ` update expenses set amount=$1, date=$2, category_id=$3, description=$4 where id=$5 returning *; `,
-        [amount, date, categoryId, description, id],
+        ` update expenses set amount=$1, date=$2, category_id=$3, description=$4, receipt=$6 where id=$5 returning *; `,
+        [amount, date, categoryId, description, id, receipt],
       );
 };
 
