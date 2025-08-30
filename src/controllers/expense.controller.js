@@ -1,3 +1,5 @@
+import v2 from "../config/cloudinary.js";
+
 import {
   getAllByUser,
   getByIdForUser,
@@ -5,6 +7,7 @@ import {
   createExpenseQuery,
   updateExpenseQuery,
 } from "../services/expense.js";
+import { getUserProfilQuery } from "../services/users.js";
 
 export async function getAllExpenses(req, res) {
   try {
@@ -30,25 +33,54 @@ export async function getExpenseById(req, res) {
 export const createExpense = async (req, res) => {
   try {
     const userId = req.user.id;
+
     const { amount, date, categoryId, description, type, startDate, endDate } =
       req.body;
-    console.log(req.body)
-    const resultSet = await createExpenseQuery(
-      description,
-      amount,
-      type,
-      date,
-      startDate,
-      endDate,
-      userId,
-      categoryId
-    );
+    const userInfo = await getUserProfilQuery(userId);
+    const userEmail = userInfo.rows[0].email;
+    const sanitizedEmail = userEmail.replace(/[@.]/g, "_");
 
-    res.status(201).json({
-      data: resultSet.rows[0],
-    });
+    if (req.file) {
+      const base64 = req.file.buffer.toString("base64");
+      const URI = "data: " + req.file.mimetype + ";base64," + base64;
+      const result = await v2.uploader.upload(URI, {
+        folder: `expense_tracker/receipts/ex${userId}${sanitizedEmail}`,
+      });
+      const URL = result.secure_url;
+      const resultSet = await createExpenseQuery(
+        description,
+        amount,
+        type,
+        date,
+        startDate,
+        endDate,
+        userId,
+        categoryId,
+        URL,
+      );
+
+      res.status(201).json({
+        message: "Expense created successfully",
+      });
+    } else {
+      const resultSet = await createExpenseQuery(
+        description,
+        amount,
+        type,
+        date,
+        startDate,
+        endDate,
+        userId,
+        categoryId,
+        null,
+      );
+
+      res.status(201).json({
+        data: resultSet.rows[0],
+      });
+    }
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({
       message: "Internal Server Error",
     });
@@ -69,14 +101,14 @@ export const updateExpense = async (req, res) => {
       type,
       startDate,
       endDate,
-      expenseId
+      expenseId,
     );
 
     res.status(200).json({
       data: resultSet.rows[0],
     });
   } catch (error) {
-    console.log(error)
+    console.log(error);
     res.status(500).json({
       message: "Internal Server Error",
     });

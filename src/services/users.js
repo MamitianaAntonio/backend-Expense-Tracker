@@ -14,11 +14,11 @@ export const createUserQuery = (email, password) => {
   );
 };
 
-export const getUserProfilQuery = (email) => {
+export const getUserProfilQuery = (userId) => {
   return pool.query(
     `
-    select email, start_date from users where email=$1
+    select email, start_date from users where id=$1
 `,
-    [email],
+    [userId],
   );
 };
