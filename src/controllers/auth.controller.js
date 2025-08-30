@@ -1,6 +1,10 @@
 import { generateToken } from "../utils/function.js";
 import { createUserQuery, getUsersQuery } from "../services/users.js";
 import bcrypt from "bcryptjs";
+import { config } from "dotenv";
+import jwt from "jsonwebtoken";
+
+config();
 
 export const signup = async (req, res) => {
   try {
