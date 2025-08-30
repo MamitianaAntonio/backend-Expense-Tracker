@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS income (
 -- ===========================
 CREATE TABLE IF NOT EXISTS categories (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(250) NOT NULL
+    name VARCHAR(250) NOT NULL,
     user_id int not null,
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
