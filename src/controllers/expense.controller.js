@@ -34,17 +34,24 @@ export const createExpense = async (req, res) => {
   try {
     const userId = req.user.id;
 
-    const { amount, date, categoryId, description, type, startDate, endDate } =
+    let { amount, date, categoryId, description, type, startDate, endDate } =
       req.body;
     const userInfo = await getUserProfilQuery(userId);
     const userEmail = userInfo.rows[0].email;
     const sanitizedEmail = userEmail.replace(/[@.]/g, "_");
 
+    type = type === "true" ? true : false;
+
+    if (!type) {
+      startDate = null;
+      endDate = null;
+    }
+
     if (req.file) {
       const base64 = req.file.buffer.toString("base64");
-      const URI = "data: " + req.file.mimetype + ";base64," + base64;
+      const URI = "data:" + req.file.mimetype + ";base64," + base64;
       const result = await v2.uploader.upload(URI, {
-        folder: `expense_tracker/receipts/ex${userId}${sanitizedEmail}`,
+        folder: `expense_tracker/receipts/ex${userId}${sanitizedEmail}${Date.now()}`,
       });
       const URL = result.secure_url;
       const resultSet = await createExpenseQuery(
