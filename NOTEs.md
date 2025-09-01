@@ -22,11 +22,11 @@
 **Route File:** `src/routes/expenseRoutes.js`  
 **Controller File:** `src/controllers/expenseController.js`
 
-- [ ] **GET /api/expenses**
+- [X] **GET /api/expenses**
   - Function: `getAllExpenses()`
   - Middleware: `authMiddleware`
 
-- [ ] **GET /api/expenses/:id**
+- [X] **GET /api/expenses/:id**
   - Function: `getExpenseById()`
   - Middleware: `authMiddleware`
 
@@ -36,13 +36,13 @@
     - `authMiddleware`
     - `multerMiddleware` (for file upload)
 
-- [ ] **PUT /api/expenses/:id**
+- [X] **PUT /api/expenses/:id**
   - Function: `updateExpense()`
   - Middleware:
     - `authMiddleware`
     - `multerMiddleware`
 
-- [ ] **DELETE /api/expenses/:id**
+- [X] **DELETE /api/expenses/:id**
   - Function: `deleteExpense()`
   - Middleware: `authMiddleware`
 
@@ -66,23 +66,23 @@
 **Route File:** `src/routes/incomeRoutes.js`  
 **Controller File:** `src/controllers/incomeController.js`
 
-- [ ] **GET /api/incomes**
+- [x] **GET /api/incomes**
   - Function: `getAllIncomes()`
   - Middleware: `authMiddleware`
 
-- [ ] **GET /api/incomes/:id**
+- [x] **GET /api/incomes/:id**
   - Function: `getIncomeById()`
   - Middleware: `authMiddleware`
 
-- [ ] **POST /api/incomes**
+- [x] **POST /api/incomes**
   - Function: `createIncome()`
   - Middleware: `authMiddleware`
 
-- [ ] **PUT /api/incomes/:id**
+- [x] **PUT /api/incomes/:id**
   - Function: `updateIncome()`
   - Middleware: `authMiddleware`
 
-- [ ] **DELETE /api/incomes/:id**
+- [x] **DELETE /api/incomes/:id**
   - Function: `deleteIncome()`
   - Middleware: `authMiddleware`
 

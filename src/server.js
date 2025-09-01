@@ -1,9 +1,12 @@
 import express, { json } from "express";
-import createTable from "./migrations/tables.js";
+import createTable from "./models/tables.js";
 import { config } from "dotenv";
 import morgan from "morgan";
-import authRoutes from "./routes/authRoutes.js";
-import userRoutes from "./routes/userRoutes.js";
+import authRoutes from "./routes/auth.routes.js";
+import userRoutes from "./routes/user.routes.js";
+import incomesRoutes from "./routes/income.routes.js";
+import expensesRoutes from "./routes/expense.routes.js";
+import categoriesRoutes from "./routes/category.routes.js"
 import cors from "cors";
 import cookieParser from "cookie-parser";
 
@@ -18,6 +21,10 @@ const port = process.env.PORT || 3000;
 
 app.use("/api/auth/", authRoutes);
 app.use("/api/user/", userRoutes);
+app.use("/api/incomes/", incomesRoutes);
+app.use("/api/expenses/", expensesRoutes);
+app.use("/api/categories/",categoriesRoutes);
+
 
 app.listen(port, () => {
   try {

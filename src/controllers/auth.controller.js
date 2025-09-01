@@ -1,6 +1,10 @@
 import { generateToken } from "../utils/function.js";
-import { createUserQuery, getUsersQuery } from "../utils/sql/users.js";
+import { createUserQuery, getUsersQuery } from "../services/users.js";
 import bcrypt from "bcryptjs";
+import { config } from "dotenv";
+import jwt from "jsonwebtoken";
+
+config();
 
 export const signup = async (req, res) => {
   try {
@@ -14,19 +18,19 @@ export const signup = async (req, res) => {
     }
 
     const hachedPassword = await bcrypt.hash(password, 10);
-    await createUserQuery(email, hachedPassword);
-
-    const [accessToken, refreshToken] = generateToken(email);
+    const createdUser = await createUserQuery(email, hachedPassword);
+    const id = createdUser.rows[0].id;
+    const [accessToken, refreshToken] = generateToken(email, id);
 
     res.cookie("access", accessToken, {
       httpOnly: true,
-      secure: false, // TODO: CHANGE THIS LATER
+      secure: false, // TODO: CHANGE THIS LATER.
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 
     res.cookie("refresh", refreshToken, {
       httpOnly: true,
-      secure: false, // TODO: CHANGE THIS LATER
+      secure: false, // TODO: CHANGE THIS LATER.
       maxAge: 30 * 24 * 60 * 60 * 1000,
     });
 
@@ -62,8 +66,9 @@ export const login = async (req, res) => {
         message: "Password doesn't match",
       });
     }
-
-    const [accessToken, refreshToken] = generateToken(email);
+    const id = userData.id;
+    console.log(id);
+    const [accessToken, refreshToken] = generateToken(email, id);
 
     res.cookie("access", accessToken, {
       httpOnly: true,
@@ -80,6 +85,43 @@ export const login = async (req, res) => {
     res.status(200).json({
       access: accessToken,
       refresh: refreshToken,
+    });
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
+export const refresh = async (req, res) => {
+  try {
+    const refreshToken = req.cookie.refresh;
+    if (!refreshToken) {
+      res.status(401).json({
+        message: "No refresh found.",
+      });
+    }
+    // AKA payload
+    const decodedInformation = jwt.verify(
+      refreshToken,
+      process.env.REFRESH_ACCESS,
+    );
+
+    // Actually I don't resend a refreshToken, due to security issues.
+    const [accessToken, _r] = generateToken(
+      decodedInformation.email,
+      decodedInformation.id,
+    );
+
+    res.cookie("access", accessToken, {
+      httpOnly: true,
+      secure: false, // TODO: CHANGE THIS LATER
+      maxAge: 7 * 24 * 60 * 60 * 1000,
+    });
+
+    res.status(200).json({
+      message: "Access token refreshed",
     });
   } catch (error) {
     console.log(error);

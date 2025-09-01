@@ -7,8 +7,6 @@ const __dirname = fileURLToPath(import.meta.url);
 const sqlMigrationFile = path.join(
   __dirname,
   "..",
-  "..",
-  "utils",
   "sql",
   "dataBase.sql",
 );
