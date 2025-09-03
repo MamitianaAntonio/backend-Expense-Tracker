@@ -54,7 +54,7 @@ export const createExpense = async (req, res) => {
         folder: `expense_tracker/receipts/ex${userId}${sanitizedEmail}${Date.now()}`,
       });
       const URL = result.secure_url;
-      const resultSet = await createExpenseQuery(
+      await createExpenseQuery(
         description,
         amount,
         type,
