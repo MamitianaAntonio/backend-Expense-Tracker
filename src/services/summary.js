@@ -1,4 +1,4 @@
-import { pool } from "../config/db";
+import { pool } from "../config/db.js";
 
 export const getExpensesSum = (userId, start_date, end_date) => {
   return pool.query(
