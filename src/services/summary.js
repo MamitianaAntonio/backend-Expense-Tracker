@@ -21,7 +21,9 @@ export const getIncomeSum = (userId, start_date, end_date) => {
 export const getMonthlyExpenses = (userId, year, month) => {
   return pool.query(
     `
-      select sum(amount) from expenses where user_id=$1 and extract(year from date) = $2 and extract(month from date) = $3;
+      select sum(amount) from expenses 
+      where user_id=$1 and extract(year from date) = coalesce($2, extract(year from current_date)) and 
+      extract(month from date) = coalesce($3, extract(month from current_date));
 `,
     [userId, year, month],
   );
@@ -30,7 +32,9 @@ export const getMonthlyExpenses = (userId, year, month) => {
 export const getMonthlyIncome = (userId, year, month) => {
   return pool.query(
     `
-      select sum(amount) from income where user_id=$1 and extract(year from date) = $2 and extract(month from date) = $3;
+      select sum(amount) from income
+      where user_id=$1 and extract(year from date) = coalesce($2, extract(year from current_date)) 
+      and extract(month from date) = coalesce($3, extract(month from current_date));
 `,
     [userId, year, month],
   );
