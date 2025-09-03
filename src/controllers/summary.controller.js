@@ -4,7 +4,7 @@ export const getSummary = async (req, res) => {
   try {
     const userId = req.user.id;
     const start_date = req.query.start;
-    const end_date = req.query.end || "current_date";
+    const end_date = req.query.end || null;
     const expenseSummaryResultSet = await getExpensesSum(
       userId,
       start_date,
