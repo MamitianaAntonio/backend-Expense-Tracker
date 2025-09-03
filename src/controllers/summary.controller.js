@@ -68,3 +68,39 @@ export const getMontlySummary = async (req, res) => {
     });
   }
 };
+export const getAlert = async (req, res) => {
+  try {
+    const userId = req.user.id;
+    const monthAndYear = req.query.month;
+    const year = monthAndYear?.slice(0, 4) || null;
+    const month = monthAndYear?.slice(5, 7) || null;
+
+    const expenseSummaryResultSet = await getMonthlyExpenses(
+      userId,
+      year,
+      month,
+    );
+    const expenseSummary = expenseSummaryResultSet.rows[0].sum;
+    const incomeSummaryResultSet = await getMonthlyIncome(userId, year, month);
+    const incomeSummary = incomeSummaryResultSet.rows[0].sum;
+
+    const remainingBlance = incomeSummary - expenseSummary;
+
+    if (remainingBlance < 0) {
+      res.status(200).json({
+        alert: true,
+        message: "You've exceeded your monthly budget by " + remainingBlance,
+      });
+    } else {
+      res.status(200).json({
+        alert: false,
+        message: "You didn't exceeded your monthly budget.",
+      });
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
