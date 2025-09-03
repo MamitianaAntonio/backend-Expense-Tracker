@@ -42,8 +42,8 @@ export const getMontlySummary = async (req, res) => {
   try {
     const userId = req.user.id;
     const monthAndYear = req.query.month;
-    const year = monthAndYear.slice(0, 4) || null;
-    const month = monthAndYear.slice(5, 7) || null;
+    const year = monthAndYear?.slice(0, 4) || null;
+    const month = monthAndYear?.slice(5, 7) || null;
 
     const expenseSummaryResultSet = await getMonthlyExpenses(
       userId,
