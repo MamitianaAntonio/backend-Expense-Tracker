@@ -15,11 +15,9 @@ export const authenticateUser = (req, res, next) => {
         tokenAuth,
         process.env.SECRET_ACCESS,
       );
-      console.log(decodedInformation);
       req.user = decodedInformation;
       next();
     } catch (error) {
-      console.log(error);
       if (error.name === "TokenExpiredError") {
         return res.status(401).json({
           message: "Expired token.",

@@ -23,7 +23,7 @@ export const getIncomesWthStartDateQuery = (id, start_date) => {
     `
     select * from income where user_id=$1 and current_date >= $2;
 `,
-    [id, start],
+    [id, start_date],
   );
 };
 
