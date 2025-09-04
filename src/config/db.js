@@ -1,9 +1,14 @@
-const { Pool } = require("pg");
 
-const poll = new poll({
-    host: process.env.DB_HOST,
-    port: process.env.DB_PORT,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASS,
-    db_name: process.env.DB_NAME
+import { Pool } from 'pg';
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
 });
+
+pool.on('error', (err) => {
+  console.error('Unexpected error on idle client:', err);
+  process.exit(-1);
+});
+
+export default pool;
