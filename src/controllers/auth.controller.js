@@ -3,6 +3,7 @@ import { createUserQuery, getUsersQuery } from "../services/users.js";
 import bcrypt from "bcryptjs";
 import { config } from "dotenv";
 import jwt from "jsonwebtoken";
+import { postCategoryQuery } from "../services/category.js";
 
 config();
 
@@ -96,7 +97,7 @@ export const login = async (req, res) => {
 
 export const refresh = async (req, res) => {
   try {
-    const refreshToken = req.cookie.refresh;
+    const refreshToken = req.cookies.refresh;
     if (!refreshToken) {
       res.status(401).json({
         message: "No refresh found.",

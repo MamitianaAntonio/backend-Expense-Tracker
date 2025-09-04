@@ -29,9 +29,11 @@ CREATE TABLE IF NOT EXISTS income (
 CREATE TABLE IF NOT EXISTS categories (
     id SERIAL PRIMARY KEY,
     name VARCHAR(250) NOT NULL,
-    user_id int not null,
+    user_id int,
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
+
+insert into categories values (1, 'Food', null), (2, 'Rent', null), (3, 'Daily need', null);
 
 -- ===========================
 -- Table: expenses
