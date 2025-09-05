@@ -1,7 +1,7 @@
 import { pool } from "../config/db.js";
 export const getCategoriesQuery = (userId) => {
   return pool.query(
-    `SELECT * FROM categories WHERE user_id = $1 or user_id = null ORDER BY id DESC;`,
+    `SELECT * FROM categories WHERE user_id = $1 or user_id is null ORDER BY id DESC;`,
     [userId],
   );
 };
