@@ -13,7 +13,12 @@ import cookieParser from "cookie-parser";
 
 config();
 const app = express();
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+  }),
+);
 app.use(morgan("dev"));
 app.use(json());
 app.use(cookieParser());
@@ -24,9 +29,8 @@ app.use("/api/auth/", authRoutes);
 app.use("/api/user/", userRoutes);
 app.use("/api/incomes/", incomesRoutes);
 app.use("/api/expenses/", expensesRoutes);
-app.use("/api/categories/",categoriesRoutes);
+app.use("/api/categories/", categoriesRoutes);
 app.use("/api/summary/", summaryRoutes);
-
 
 app.listen(port, () => {
   try {
