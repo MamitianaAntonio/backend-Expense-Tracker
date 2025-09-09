@@ -45,6 +45,7 @@ CREATE TABLE IF NOT EXISTS expenses (
     amount FLOAT NOT NULL,
     type BOOLEAN,
     date DATE,
+    creation_date DATE DEFAULT CURRENT_DATE,
     start_date DATE,
     end_date DATE,
     receipt TEXT,

@@ -10,10 +10,11 @@ export const createExpenseQuery = async (
   user_id,
   category_id,
   receipt,
+  creationDate
 ) => {
   return type
     ? pool.query(
-        `insert into expenses (description, amount, type, date, start_date, end_date, user_id, category_id, receipt) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *;`,
+        `insert into expenses (description, amount, type, date, start_date, end_date, user_id, category_id, receipt,creationDate) values ($1, $2, $3, $4, $5, $6, $7, $8, $9) returning *;`,
         [
           description,
           amount,
@@ -24,11 +25,12 @@ export const createExpenseQuery = async (
           user_id,
           category_id,
           receipt,
+          creationDate
         ],
       )
     : pool.query(
         `insert into expenses (description, amount, type, date, user_id, category_id, receipt) values ($1, $2, $3, $4, $5, $6, $7) returning *;`,
-        [description, amount, type, date, user_id, category_id, receipt],
+        [description, amount, type, date, user_id, category_id, receipt, creationDate],
       );
 };
 
@@ -56,6 +58,7 @@ export const updateExpenseQuery = async (
           endDate,
           id,
           receipt,
+          creationDate
         ],
       )
     : pool.query(

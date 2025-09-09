@@ -32,8 +32,7 @@ export async function getExpenseById(req, res) {
 
 export const createExpense = async (req, res) => {
   try {
-    const userId = req.user.id;
-
+    const userId = req.user.id; 
     let { amount, date, categoryId, description, type, startDate, endDate } =
       req.body;
     const userInfo = await getUserProfilQuery(userId);
@@ -47,6 +46,8 @@ export const createExpense = async (req, res) => {
       endDate = null;
     }
 
+    const creationDate = new Date().toISOString().split("T")[0];
+
     if (req.file) {
       const base64 = req.file.buffer.toString("base64");
       const URI = "data:" + req.file.mimetype + ";base64," + base64;
@@ -58,12 +59,13 @@ export const createExpense = async (req, res) => {
         description,
         amount,
         type,
-        date,
+        type ? null : date,
         startDate,
         endDate,
         userId,
         categoryId,
         URL,
+        creationDate
       );
 
       res.status(201).json({
