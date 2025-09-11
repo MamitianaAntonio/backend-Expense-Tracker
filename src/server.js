@@ -41,3 +41,4 @@ app.listen(port, () => {
     console.error("Couldn't create tables: " + error);
   }
 });
+ 
