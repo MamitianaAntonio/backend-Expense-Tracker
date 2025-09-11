@@ -1,3 +1,4 @@
+import { log } from "console";
 import {
   deleteIncomeQuery,
   getIncomesBtwDateQuery,
@@ -86,7 +87,7 @@ export const postIncome = async (req, res) => {
 export const updateIncome = async (req, res) => {
   try {
     const id = req.user.id;
-    const idx = req.query.id;
+    const idx = req.params.id;
     const amount = req.body.amount;
     const date = req.body.date;
     const source = req.body.source;
@@ -108,8 +109,11 @@ export const updateIncome = async (req, res) => {
 export const deleteIncome = async (req, res) => {
   try {
     const idx = req.user.id;
-    const id = req.query.id;
+    const id = req.params.id;
     await deleteIncomeQuery(id, idx);
+    console.log(id);
+    console.log(idx);
+    
     res.status(200).json({
       message: "Income deleted succesfully",
     });
