@@ -32,9 +32,8 @@ export async function getExpenseById(req, res) {
 
 export const createExpense = async (req, res) => {
   try {
-    const userId = req.user.id; 
-    let { amount, date, categoryId, description, type, startDate, endDate } =
-      req.body;
+    const userId = req.user.id;
+    let { amount, date, categoryId, description, type, startDate, endDate } = req.body;
     const userInfo = await getUserProfilQuery(userId);
     const userEmail = userInfo.rows[0].email;
     const sanitizedEmail = userEmail.replace(/[@.]/g, "_");
@@ -46,7 +45,7 @@ export const createExpense = async (req, res) => {
       endDate = null;
     }
 
-    const creationDate = new Date().toISOString().split("T")[0];
+    const creation_date = new Date().toISOString().split("T")[0];
 
     if (req.file) {
       const base64 = req.file.buffer.toString("base64");
@@ -65,7 +64,7 @@ export const createExpense = async (req, res) => {
         userId,
         categoryId,
         URL,
-        creationDate
+        creation_date 
       );
 
       res.status(201).json({
@@ -82,6 +81,7 @@ export const createExpense = async (req, res) => {
         userId,
         categoryId,
         null,
+        creation_date // Passé comme creation_date
       );
 
       res.status(201).json({
@@ -101,8 +101,7 @@ export const updateExpense = async (req, res) => {
     const userId = req.user.id;
     const expenseId = req.params.id;
 
-    let { amount, date, categoryId, description, type, startDate, endDate } =
-      req.body;
+    let { amount, date, categoryId, description, type, startDate, endDate } = req.body;
     const userInfo = await getUserProfilQuery(userId);
     const userEmail = userInfo.rows[0].email;
     const sanitizedEmail = userEmail.replace(/[@.]/g, "_");
