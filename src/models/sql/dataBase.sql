@@ -35,6 +35,8 @@ CREATE TABLE IF NOT EXISTS categories (
 
 insert into categories values (1, 'Food', null), (2, 'Rent', null), (3, 'Daily need', null);
 
+SELECT setval('categories_id_seq', (SELECT MAX(id) FROM categories));
+
 -- ===========================
 -- Table: expenses
 -- ===========================
