@@ -131,3 +131,27 @@ export const refresh = async (req, res) => {
     });
   }
 };
+
+export const logout = async (req, res) => {
+  try {
+    res.clearCookie("access", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      path: "/",
+    });
+    res.clearCookie("refresh", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "strict",
+      path: "/",
+    });
+    res.status(200).json({
+      message: "User logged out successfully",
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
