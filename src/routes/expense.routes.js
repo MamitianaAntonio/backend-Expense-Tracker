@@ -30,4 +30,3 @@ router.put("/:id", authenticateUser, upload.single("receipt"), updateExpense);
 router.delete("/:id", authenticateUser, deleteExpense);
 
 export default router;
-
