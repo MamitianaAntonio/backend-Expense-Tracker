@@ -33,7 +33,6 @@ CREATE TABLE IF NOT EXISTS categories (
     FOREIGN KEY(user_id) REFERENCES users(id)
 );
 
-insert into categories values (1, 'Food', null), (2, 'Rent', null), (3, 'Daily need', null);
 
 -- ===========================
 -- Table: expenses
