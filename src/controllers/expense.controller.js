@@ -46,7 +46,7 @@ export const createExpense = async (req, res) => {
       startDate = null;
       endDate = null;
     }
-
+    const creationDate = new Date().toISOString().split("T")[0];
     if (req.file) {
       const base64 = req.file.buffer.toString("base64");
       const URI = "data:" + req.file.mimetype + ";base64," + base64;
@@ -58,12 +58,13 @@ export const createExpense = async (req, res) => {
         description,
         amount,
         type,
-        date,
+        type ? null : date,
         startDate,
         endDate,
         userId,
         categoryId,
         URL,
+        creationDate
       );
 
       res.status(201).json({
@@ -74,12 +75,13 @@ export const createExpense = async (req, res) => {
         description,
         amount,
         type,
-        date,
+        type ?null : date,
         startDate,
         endDate,
         userId,
         categoryId,
         null,
+        creationDate
       );
 
       res.status(201).json({

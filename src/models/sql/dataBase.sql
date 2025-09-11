@@ -40,7 +40,6 @@ insert into categories values (1, 'Food', null), (2, 'Rent', null), (3, 'Daily n
 -- ===========================
 CREATE TABLE IF NOT EXISTS expenses (
     id SERIAL PRIMARY KEY,
-    name VARCHAR(200),
     description VARCHAR(250),
     amount FLOAT NOT NULL,
     type BOOLEAN,
@@ -48,6 +47,7 @@ CREATE TABLE IF NOT EXISTS expenses (
     start_date DATE,
     end_date DATE,
     receipt TEXT,
+    creationDate DATE DEFAULT CURRENT_DATE,
     user_id INT NOT NULL,
     category_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id),
