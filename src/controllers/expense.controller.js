@@ -58,25 +58,24 @@ export const createExpense = async (req, res) => {
         description,
         amount,
         type,
-        type ? null : date,
-        type ? null : date,
-        startDate,
+        date,
+       startDate,
         endDate,
         userId,
         categoryId,
         URL,
         creation_date 
       );
-
       res.status(201).json({
         message: "Expense created successfully",
       });
     } else {
+      console.log(req.body)
       const resultSet = await createExpenseQuery(
         description,
-        amount,
-        type,
-        type ?null : date,
+        amount, 
+        type ?null : type,
+        date,
         startDate,
         endDate,
         userId,
